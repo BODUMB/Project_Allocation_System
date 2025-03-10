@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Dashboard Form</title>
+  <style>
+    /* Apply background color to both body and html to ensure full-page coverage */
+    html, body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;  /* Changed background color here */
+      height: 100%;  /* Ensure full page height */
+    }
+
+    .header {
+      color: black;
+      padding: 10px 20px;
+      font-size: 30px;
+      font-weight: bolder;
+      text-align: center;
+    }
+
+    .container {
+      padding: 20px;
+      background-color: white;
+      margin: 20px;
+      border-radius: 8px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+
+    .personal-info-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid black;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid white;
+      border-radius: 5px;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: white;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">DASH BOARD</div>
+
+  <div class="container">
+    <!-- Personal Information Form -->
+    <div class="card">
+      <h3>Personal Information</h3>
+      <div class="personal-info-container">
+        <div class="profile-image">
+          <img src="https://via.placeholder.com/120" alt="Profile Picture">
+        </div>
+        <form>
+          <div class="form-group">
+            <label for="employee-id">Employee ID:</label>
+            <input type="text" id="employee-id" name="employee-id" placeholder="Enter Employee ID">
+          </div>
+          <div class="form-group">
+            <label for="employee-name">Employee Name:</label>
+            <input type="text" id="employee-name" name="employee-name" placeholder="Enter Employee Name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+            <label for="contact">Contact:</label>
+            <input type="text" id="contact" name="contact" placeholder="Enter Contact Number">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Role Information Form -->
+    <div class="card">
+      <h3>Role Information</h3>
+      <div class="role-info">
+        <table>
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Name</th>
+              <th>Associate / Assistant Professor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <input type="text" name="role-name" placeholder="Enter Role Name">
+              </td>
+              <td>
+                <select name="role-level">
+                  <option value="associate-professor">Associate Professor</option>
+                  <option value="assistant-professor">Assistant Professor</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Working with Department Form -->
+    <div class="card">
+      <h3>Working With Department</h3>
+      <div class="department-info">
+        <table>
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Department Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <select name="department-1">
+                  <option value="computer-science">Department of Computer Science</option>
+                  <option value="information-technology">Department of Information Technology</option>
+                  <option value="chemical-engineering">Department of Chemical Engineering</option>
+                  <option value="aeronautical-engineering">Department of Aeronautical Engineering</option>
+                  <option value="electronics">Department of Electronics</option>
+                  <option value="electrical">Department of Electrical</option>
+                  <option value="mechanical">Department of Mechanical</option>
+                  <option value="civil">Department of Civil</option>
+                  <option value="biomedical">Department of Biomedical</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <select name="department-2">
+                  <option value="computer-science">Department of Computer Science</option>
+                  <option value="information-technology">Department of Information Technology</option>
+                  <option value="chemical-engineering">Department of Chemical Engineering</option>
+                  <option value="aeronautical-engineering">Department of Aeronautical Engineering</option>
+                  <option value="electronics">Department of Electronics</option>
+                  <option value="electrical">Department of Electrical</option>
+                  <option value="mechanical">Department of Mechanical</option>
+                  <option value="civil">Department of Civil</option>
+                  <option value="biomedical">Department of Biomedical</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <select name="department-3">
+                  <option value="computer-science">Department of Computer Science</option>
+                  <option value="information-technology">Department of Information Technology</option>
+                  <option value="chemical-engineering">Department of Chemical Engineering</option>
+                  <option value="aeronautical-engineering">Department of Aeronautical Engineering</option>
+                  <option value="electronics">Department of Electronics</option>
+                  <option value="electrical">Department of Electrical</option>
+                  <option value="mechanical">Department of Mechanical</option>
+                  <option value="civil">Department of Civil</option>
+                  <option value="biomedical">Department of Biomedical</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Submit</button>
+  </div>
+
+</body>
+</html>
