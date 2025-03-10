@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Allocation Dashboard</title>
+    <link rel="stylesheet" href="css/project.css">
+</head>
+<body>
+    <header>
+        <h1>Project Allocation and Marks Updation Dashboard</h1>
+    </header>
+    <main>
+        <section class="allocation-section">
+            <h2>Project Allocation</h2>
+            <form id="project-allocation-form">
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" name="student-name" required>
+
+                <label for="project-title">Project Title:</label>
+                <input type="text" id="project-title" name="project-title" required>
+
+                <label for="mentor-name">Mentor Name:</label>
+                <input type="text" id="mentor-name" name="mentor-name" required>
+
+                <button type="submit">Allocate Project</button>
+            </form>
+        </section>
+
+        <section class="marks-section">
+            <h2>Marks Updation</h2>
+            <form id="marks-updation-form">
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" name="student-id" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="marks">Marks:</label>
+                <input type="number" id="marks" name="marks" required min="0" max="100">
+
+                <button type="submit">Update Marks</button>
+            </form>
+        </section>
+
+        <section class="view-data">
+            <h2>View Allocations and Marks</h2>
+            <button id="view-allocations">View All Allocations</button>
+            <button id="view-marks">View All Marks</button>
+            <div id="data-display"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Project Dashboard. All rights reserved.</p>
+    </footer>
+</body>
+</html>
