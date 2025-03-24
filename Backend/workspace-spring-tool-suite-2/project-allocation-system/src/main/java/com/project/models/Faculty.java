@@ -8,116 +8,89 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Student {
-	
+public class Faculty {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer StudentId;
-	private String Name;
+	private Integer facultyID;
+	private String name;
 	private String email;
 	private String password;
-	private List<String> Skills;
-	private List<String> Achievements;
-	private Integer GroupId;
+	private List<String> skills;
+	private String Experience;
 	private Role role;
 	
-	public Student() {
+	public Faculty() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public Student(Integer studentId, String name, String email, String password, List<String> skills,
-			List<String> achievements, Integer groupId, Role role) {
+
+	public Faculty(Integer facultyID, String name, String email, String password, List<String> skills,
+			String experience, Role role) {
 		super();
-		StudentId = studentId;
-		Name = name;
+		this.facultyID = facultyID;
+		this.name = name;
 		this.email = email;
 		this.password = password;
-		Skills = skills;
-		Achievements = achievements;
-		GroupId = groupId;
+		this.skills = skills;
+		Experience = experience;
 		this.role = role;
 	}
 
-
-	public Integer getStudentId() {
-		return StudentId;
+	public Integer getFacultyID() {
+		return facultyID;
 	}
 
-
-	public void setStudentId(Integer studentId) {
-		StudentId = studentId;
+	public void setFacultyID(Integer facultyID) {
+		this.facultyID = facultyID;
 	}
-
 
 	public String getName() {
-		return Name;
+		return name;
 	}
-
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public List<String> getSkills() {
-		return Skills;
+		return skills;
 	}
-
 
 	public void setSkills(List<String> skills) {
-		Skills = skills;
+		this.skills = skills;
 	}
 
-
-	public List<String> getAchievements() {
-		return Achievements;
+	public String getExperience() {
+		return Experience;
 	}
 
-
-	public void setAchievements(List<String> achievements) {
-		Achievements = achievements;
+	public void setExperience(String experience) {
+		Experience = experience;
 	}
-
-
-	public Integer getGroupId() {
-		return GroupId;
-	}
-
-
-	public void setGroupId(Integer groupId) {
-		GroupId = groupId;
-	}
-
 
 	public Role getRole() {
 		return role;
 	}
 
-
 	public void setRole(Role role) {
 		this.role = role;
-	}
+	}	
 	
+
 }
