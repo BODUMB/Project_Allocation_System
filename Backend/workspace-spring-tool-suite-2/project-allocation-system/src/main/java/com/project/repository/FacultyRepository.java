@@ -10,4 +10,5 @@ import com.project.models.Student;
 public interface FacultyRepository extends JpaRepository<Faculty, Integer>{
 	
 	public Optional<Faculty> findByName(String name);
+	public Optional<Faculty> findByEmail(String email);
 }

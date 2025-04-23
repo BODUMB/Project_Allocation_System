@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.models.Faculty;
+import com.project.models.Student;
 import com.project.models.StudentGroup;
+import com.project.repository.FacultyRepository;
 import com.project.repository.GroupRepository;
+import com.project.repository.StudentRepository;
 
 @RestController
 @RequestMapping("/admin")
@@ -22,6 +26,45 @@ public class AdminController {
 	
 	@Autowired
 	GroupRepository groupRepository;
+	
+	@Autowired
+	StudentRepository studentRepository;
+	
+	@Autowired
+	FacultyRepository facultyRepository;
+	
+	// ✅ Get all faculties
+    @GetMapping("/faculties")
+    public List<Faculty> getFaculties() {
+        return facultyRepository.findAll();
+    }
+
+    // ✅ Get all students	
+    @GetMapping("/getStudents")
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+    
+    // ✅ Get all groups
+    @GetMapping("/getGroups")
+    public List<StudentGroup> getGroups() {
+        return groupRepository.findAll();
+    }
+	
+	// ✅ Register new student
+    @PostMapping("/register")
+    public Student createStudent(@RequestBody Student student) {
+        Student newStudent = new Student();
+        newStudent.setName(student.getName());
+        newStudent.setEmail(student.getEmail());
+        newStudent.setPassword(student.getPassword());
+        newStudent.setRole(student.getRole());
+        if (student.getGroupId() != null) {
+            newStudent.setGroupId(student.getGroupId());
+        }
+
+        return studentRepository.save(newStudent);
+    }
 	
 	@GetMapping("/getGroups/{facultyId1}")
 	public ResponseEntity<StudentGroup> monitor(@PathVariable Integer facultyId1) {

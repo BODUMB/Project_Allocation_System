@@ -17,10 +17,13 @@ public class StudentGroup {
 
     private String groupName; 
     private List<Integer> members;
-    private List<Integer> marks;
-    
-    private Integer facultyId;  
 
+    // Separate marks for different components
+    private List<Integer> taskMarks;
+    private List<Integer> presentationMarks;
+    private List<Integer> reportMarks; 
+
+    private Integer facultyId;  
     private Integer projectId;
 
     @Version
@@ -51,12 +54,28 @@ public class StudentGroup {
         this.members = members;
     }
 
-    public List<Integer> getMarks() {
-        return marks;
+    public List<Integer> getTaskMarks() {
+        return taskMarks;
     }
 
-    public void setMarks(List<Integer> marks) {
-        this.marks = marks;
+    public void setTaskMarks(List<Integer> taskMarks) {
+        this.taskMarks = taskMarks;
+    }
+
+    public List<Integer> getPresentationMarks() {
+        return presentationMarks;
+    }
+
+    public void setPresentationMarks(List<Integer> presentationMarks) {
+        this.presentationMarks = presentationMarks;
+    }
+
+    public List<Integer> getReportMarks() {
+        return reportMarks;
+    }
+
+    public void setReportMarks(List<Integer> reportMarks) {
+        this.reportMarks = reportMarks;
     }
 
     public Integer getFacultyId() {

@@ -5,7 +5,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.models.Faculty;
@@ -22,6 +25,9 @@ import jakarta.transaction.Transactional;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
+	
+	@Autowired	
+	private PasswordEncoder passwordEncoder;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -66,7 +72,8 @@ public class StudentController {
         Student newStudent = new Student();
         newStudent.setName(student.getName());
         newStudent.setEmail(student.getEmail());
-        newStudent.setPassword(student.getPassword());
+        newStudent.setPassword(passwordEncoder.encode(student.getPassword()));
+        newStudent.setRole(student.getRole());
 
         if (student.getGroupId() != null) {
             newStudent.setGroupId(student.getGroupId());
@@ -74,22 +81,48 @@ public class StudentController {
 
         return studentRepository.save(newStudent);
     }
+    
+    @PutMapping("/update/{email}")
+    public ResponseEntity<Student> updateStudent(@PathVariable String email, @RequestBody Student studentDetails) {
+        Optional<Student> optionalStudent = studentRepository.findByEmail(email);
+
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+
+            student.setName(studentDetails.getName());
+            student.setEmail(studentDetails.getEmail());
+            String encodedPassword = passwordEncoder.encode(studentDetails.getPassword());
+            student.setPassword(encodedPassword);
+            student.setRole(studentDetails.getRole());
+            student.setSkills(studentDetails.getSkills());
+            student.setAchievements(studentDetails.getAchievements());
+
+            if (studentDetails.getGroupId() != null) {
+                student.setGroupId(studentDetails.getGroupId());
+            }
+
+            Student updatedStudent = studentRepository.save(student);
+            return ResponseEntity.ok(updatedStudent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     // ✅ Student login
     @PostMapping("/login")
-    public String login(@RequestBody Student student) {
+    public ResponseEntity<String> login(@RequestBody Student student) {
         Optional<Student> existingStudent = studentRepository.findByEmail(student.getEmail());
 
         if (existingStudent.isPresent()) {
             Student fetchedStudent = existingStudent.get();
 
-            if (fetchedStudent.getPassword().equals(student.getPassword())) {
-                return "Login Successful";
+            if (passwordEncoder.matches(student.getPassword(), fetchedStudent.getPassword())) {
+                return ResponseEntity.ok("Login Successful");
             } else {
-                return "Invalid Credentials. Please try again";
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials. Please try again");
             }
         } else {
-            return "Student not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
         }
     }
 

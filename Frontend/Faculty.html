@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="img/p1-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <img src="img/p1-removebg-preview.png" alt="app Logo" class="logo">
+        </div>
+        <h1 class="title">KIIT Project Allocation and Marks Upload</h1>
+        <div class="header-right">
+            <img src="img/KIIT-logo-HD.png" alt="KIIT Logo" class="logo">
+            <div class="user-info">
+                <span class="user-role">Faculty</span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" data-section="profile">My Profile</a></li>
+                <li><a href="#" data-section="projectAllocation">Project Allocation</a></li>
+                <li><a href="#" data-section="view projects & add Marks">view Projects & Add Marks</a></li>
+                <li><a href="#" data-section="meeting">Meeting</a></li>
+                <li><a href="#" data-section="final Marks viewport">Final Marks Viewport</a></li>
+                <li><a href="#" data-section="notifications">Notifications</a></li>
+            </ul>
+        </aside>
+        <main class="content" id="mainContent">
+            <h2 id="welcomeText">Welcome to Faculty Dashboard</h2>
+
+            <!-- Profile Section -->
+            <div id="profileSection" class="section" style="display: none;">
+                <div class="profile-container">
+                    <div class="profile-container">
+                        <h2>Faculty Profile</h2>
+                        <div class="profile-details">
+                            <div class="profile-item">
+                                <span class="profile-label">Full Name:</span>
+                                <span id="displayFacultyName" class="profile-value"></span>
+                            </div>
+    
+                            <div class="profile-item">
+                                <span class="profile-label">Faculty ID:</span>
+                                <span id="displayFacultyId" class="profile-value"></span>
+                            </div>
+    
+                            <div class="profile-item">
+                                <span class="profile-label">Official Email:</span>
+                                <span id="displayEmail" class="profile-value"></span>
+                            </div>
+    
+                            <div class="profile-item">
+                                <span class="profile-label">Experience (Years):</span>
+                                <span id="displayExperience" class="profile-value"></span>
+                            </div>
+    
+                            <div class="profile-item">
+                                <span class="profile-label">Role:</span>
+                                <span id="displayRole" class="profile-value"></span>
+                            </div>
+    
+                            <div class="profile-item">
+                                <span class="profile-label">Skills:</span>
+                                <span id="displaySkills" class="profile-value"></span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- Project Allocation Section -->
+            <div id="projectAllocationSection" class="section" style="display: none;">
+                <h2>Project Allocation</h2>
+
+                <div class="project-allocation-container">
+                    <!-- Group Selection -->
+                    <div class="group-selection">
+                        <h3>Select Student Group</h3>
+                        <form id="groupSelectionForm">
+                            <div class="form-group">
+                                <label for="academicYear">Academic Year</label>
+                                <select id="academicYear" name="academicYear" required>
+                                    <option value="">Select Year</option>
+                                    <option value="2023-2024">2023-2024</option>
+                                    <option value="2024-2025">2024-2025</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="studentGroup">Student Group</label>
+                                <select id="studentGroup" name="studentGroup" required>
+                                    <option value="">Select Group</option>
+                                    <option value="Group A">Group A</option>
+                                    <option value="Group B">Group B</option>
+                                    <option value="Group C">Group C</option>
+                                    <option value="Group D">Group D</option>
+                                </select>
+                            </div>
+
+                            <button type="button" id="loadGroupDetailsBtn" class="btn-load">Load Group Details</button>
+                        </form>
+                    </div>
+
+                    <!-- Group Members -->
+                    <div id="groupMembersContainer" class="group-members" style="margin-top: 20px;"></div>
+
+                    <!-- Project Assignment -->
+                    <div id="projectAssignmentSection" style="display: none;">
+                        <h3>Assign Project</h3>
+                        <form id="projectAssignmentForm">
+                            <div class="form-group">
+                                <label for="projectTitle">Project Title</label>
+                                <input type="text" id="projectTitle" name="projectTitle" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="projectDomain">Project Domain</label>
+                                <select id="projectDomain" name="projectDomain" required>
+                                    <option value="">Select Domain</option>
+                                    <option value="Web Development">Web Development</option>
+                                    <option value="Machine Learning">Machine Learning</option>
+                                    <option value="Data Science">Data Science</option>
+                                    <option value="Mobile App Development">Mobile App Development</option>
+                                    <option value="IoT">Internet of Things</option>
+                                    <option value="Cloud Computing">Cloud Computing</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="projectDescription">Project Description</label>
+                                <textarea id="projectDescription" name="projectDescription" rows="4" required></textarea>
+                            </div>
+
+                            <!-- Submission Details -->
+                            <div class="submission-details">
+                                <div class="form-group">
+                                    <label for="taskSubmissionDate">Task Submission Date</label>
+                                    <input type="date" id="taskSubmissionDate" name="taskSubmissionDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="presentationDate">Presentation Date</label>
+                                    <input type="date" id="presentationDate" name="presentationDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ieeeReportDate">IEEE Report Submission Date</label>
+                                    <input type="date" id="ieeeReportDate" name="ieeeReportSubmissionDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="projectReportDate">Project Report Submission Date</label>
+                                    <input type="date" id="projectReportDate" name="reportSubmissionDate" required>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-assign">Assign Project</button>
+                                <button type="reset" class="btn-reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>  
+
+            <!-- Add this inside the <main class="content"> section, after the Project Allocation section -->
+            <div id="viewProjectsMarksSection" class="section" style="display: none;">
+                <div class="projects-marks-container">
+                    <h2>View Projects & Add Marks</h2>
+
+                    <!-- Group Selection -->
+                    <div class="group-selection">
+                        <form id="groupSelectionForMarksForm">
+                            <div class="form-group">
+                                <label for="academicYearMarks">Academic Year</label>
+                                <select id="academicYearMarks" name="academicYearMarks" required>
+                                    <option value="">Select Year</option>
+                                    <option value="2023-2024">2023-2024</option>
+                                    <option value="2024-2025">2024-2025</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="projectGroupMarks">Select Project Group</label>
+                                <select id="projectGroupMarks" name="projectGroupMarks" required>
+                                    <option value="">Select Group</option>
+                                    <option value="Group A">Group A</option>
+                                    <option value="Group B">Group B</option>
+                                    <option value="Group C">Group C</option>
+                                    <option value="Group D">Group D</option>
+                                </select>
+                            </div>
+
+                            <button type="button" id="loadGroupDetailsForMarksBtn" class="btn-load">Load Group
+                                Details</button>
+                        </form>
+                    </div>
+
+                    <!-- Group Details and Marks Section -->
+                    <div id="groupDetailsMarksSection" style="display: none;">
+                        <div class="group-details">
+                            <h3>Group Details</h3>
+                            <table id="groupMembersTable" class="group-members-table">
+                                <thead>
+                                    <tr>
+                                        <th>Roll No</th>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Project Domain</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="groupMembersTableBody">
+                                    <!-- Dynamic content will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="project-tasks-section">
+                            <h3>Project Tasks</h3>
+                            <table id="projectTasksTable" class="project-tasks-table">
+                                <thead>
+                                    <tr>
+                                        <th>Task Name</th>
+                                        <th>Submission Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projectTasksTableBody">
+                                    <!-- Dynamic content will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="marks-allocation-section">
+                            <h3>Marks Allocation</h3>
+                            <form id="marksAllocationForm">
+                                <table id="marksAllocationTable" class="marks-allocation-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <th>Task Marks</th>
+                                            <th>Presentation Marks</th>
+                                            <th>Report Marks</th>
+                                            <th>Total Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="marksAllocationTableBody">
+                                        <!-- Dynamic content will be added here -->
+                                    </tbody>
+                                </table>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-submit-marks">Submit Marks</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add this inside the <main class="content"> section, after the View Projects & Add Marks section -->
+            <div id="meetingSection" class="section" style="display: none;">
+                <div class="meeting-container">
+                    <h2>Schedule Project Meeting</h2>
+                    <form id="meetingScheduleForm" class="meeting-form">
+                        <div class="form-group">
+                            <label for="availableGroups">Select Student Group</label>
+                            <select id="availableGroups" name="availableGroups" required>
+                                <!-- Groups will be populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingDate">Meeting Date</label>
+                            <input type="date" id="meetingDate" name="meetingDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingTime">Meeting Time</label>
+                            <input type="time" id="meetingTime" name="meetingTime" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="meetingComment">Additional Comments</label>
+                            <textarea id="meetingComment" name="meetingComment" rows="3"
+                                placeholder="Optional comments about the meeting"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-schedule">Schedule Meeting</button>
+                            <button type="reset" class="btn-reset">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Add this inside the <main class="content"> section, after the Notifications section -->
+            <div id="finalMarksViewportSection" class="section" style="display: none;">
+                <div class="final-marks-container">
+                    <h2>Final Marks Viewport</h2>
+
+                    <div class="marks-filter">
+                        <div class="form-group">
+                            <label for="academicYearFinalMarks">Academic Year</label>
+                            <select id="academicYearFinalMarks" name="academicYearFinalMarks" required>
+                                <option value="">Select Year</option>
+                                <option value="2023-2024">2023-2024</option>
+                                <option value="2024-2025">2024-2025</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departmentFinalMarks">Department</label>
+                            <select id="departmentFinalMarks" name="departmentFinalMarks" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Biotechnology">Biotechnology</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                            </select>
+                        </div>
+
+                        <button type="button" id="loadFinalMarksBtn" class="btn-load">Load Final Marks</button>
+                    </div>
+
+                    <div id="finalMarksTableContainer" style="display: none;">
+                        <table id="finalMarksTable" class="final-marks-table">
+                            <thead>
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Project Domain</th>
+                                    <th>Task Marks</th>
+                                    <th>Presentation Marks</th>
+                                    <th>Report Marks</th>
+                                    <th>Total Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="finalMarksTableBody">
+                                <!-- Dynamic content will be added here -->
+                            </tbody>
+                        </table>
+
+                        <div class="export-actions">
+                            <button id="exportToExcelBtn" class="btn-export">Export to Excel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Notifications Panel -->
+            <div id="notificationsSection" class="section" style="display: none;">
+                <div class="notifications-container">
+                    <h2>Notifications</h2>
+                    <div id="notificationsPanel" class="notifications-panel">
+                        <!-- Notifications will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 KIIT Project Allocation and Marks Upload</p>
+    </footer>
+
+    <script src="js/Faculty.js"></script>
+
+</body>
+
+</html>

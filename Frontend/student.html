@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="icon" href="img/p1-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <img src="img/p1-removebg-preview.png" alt="app Logo" class="logo">
+        </div>
+        <h1 class="title">KIIT Project Allocation and Marks Upload</h1>
+        <div class="header-right">
+            <img src="img/KIIT-logo-HD.png" alt="KIIT Logo" class="logo">
+            <table>
+                <tr>
+                    <td align="center">Student</td>
+                </tr>
+                <tr>
+                    <td><button onclick="logout()" class="logout-btn">Logout</button></td>
+                </tr>
+            </table>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" data-section="profile">My Profile</a></li>
+                <li><a href="#" data-section="groupDetails">Group Details</a></li>
+                <li><a href="#" data-section="projects">Project</a></li>
+                <li><a href="#" data-section="Faculty Allocation">Teacher Allocation</a></li>
+                <li><a href="#" data-section="notifications">Notifications</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <h2 id="welcomeText">Welcome to the Student Dashboard</h2>
+
+            <!-- Profile Section -->
+            <section id="profile" style="display: none;">
+                <h2>My Profile</h2>
+                <div id="profileInfo">
+                    <p><strong>Name:</strong> <span id="studentName">Loading...</span></p>
+                    <p><strong>Student ID / Roll Number:</strong> <span id="studentID">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="studentEmail">Loading...</span></p>
+                    <p><strong>Department:</strong> <span id="studentDepartment">Loading...</span></p>
+                    <p><strong>Skills:</strong> <span id="studentSkills">Not Available</span></p>
+                </div>
+
+                <!-- Update Profile Form (Hidden by Default) -->
+                <form id="profileForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="department">Department:</label>
+                    <input type="text" id="department" name="department" required>
+
+                    <label for="skills">Skills:</label>
+                    <input type="text" id="skills" name="skills" placeholder="e.g., Python, Java, SQL">
+
+                    <button type="submit">Update Profile</button>
+                </form>
+            </section>
+
+            <!-- Group Details Section -->
+            <section id="groupDetails" style="display: none;">
+                <section id="groupCreation">
+                    <h2>Create a Group</h2>
+                    <input type="text" id="groupName" placeholder="Enter group name">
+                    <button onclick="createGroup()">Create Group</button>
+                </section>
+
+                <section id="groupDetailsSection" style="display: none;">
+                    <h2>Group Details</h2>
+                    <p>Group Size: <span id="groupSize">0 / 4</span></p>
+                    <table id="group-details-table">
+                        <thead>
+                            <tr>
+                                <th>Sl. No</th>
+                                <th>Roll No</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button onclick="addMember()">Add Member</button>
+                </section>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" style="display: none;">
+                <h2>Assigned Projects</h2>
+                <ul id="projectList"></ul>
+            </section>
+
+            <!-- Teacher Allocation Section -->
+            <section id="FacultyAllocation" style="display: none;">
+                <h2>Teacher Allocation</h2>
+                <label for="facultyList">Select a Faculty:</label>
+                <select id="facultyList"></select>
+                <button onclick="requestMentorship()">Request Mentorship</button>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications" style="display: none;">
+                <h2>Notifications</h2>
+                <ul id="notificationList"></ul>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 KIIT Project Allocation and Marks Upload</p>
+    </footer>
+
+    <script src="js/student.js"></script>
+</body>
+</html>
